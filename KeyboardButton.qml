@@ -13,6 +13,8 @@ Rectangle {
     property int pixelSize: 24
     property bool functionButton: false
 
+    signal buttonReleased
+
     Text {
         text: root.text
         color: "white"
@@ -34,6 +36,14 @@ Rectangle {
 
         onReleased: {
             root.border.width = 0
+            if (root.functionButton === false)
+            {
+                KeyboardHandler.keyPressed(root.text)
+            }
+            else
+            {
+                buttonReleased()
+            }
         }
     }
 }

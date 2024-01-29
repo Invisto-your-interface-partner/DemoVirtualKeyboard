@@ -280,7 +280,7 @@ Rectangle {
                     model: firstRowAlphabetical
 
                     KeyboardButton {
-                        text: model.noCaps
+                        text: root.useCaps ? model.caps : model.noCaps
                     }
                 }
             }
@@ -310,7 +310,7 @@ Rectangle {
                     model: secondRowAlphabetical
 
                     KeyboardButton {
-                        text: model.noCaps
+                        text: root.useCaps ? model.caps : model.noCaps
                     }
                 }
             }
@@ -325,6 +325,10 @@ Rectangle {
                     width: 128
                     functionButton: true
                     text: "Aa"
+
+                    onButtonReleased: {
+                        KeyboardHandler.useCaps = !KeyboardHandler.useCaps
+                    }
                 }
 
                 ListModel {
@@ -344,7 +348,7 @@ Rectangle {
                     model: thirdRowAlphabetical
 
                     KeyboardButton {
-                        text: model.noCaps
+                        text: root.useCaps ? model.caps : model.noCaps
                     }
                 }
 
@@ -354,13 +358,7 @@ Rectangle {
                     pixelSize: 32
                     text: "←"
 
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: {
-                            // root.state = "hidden"
-
-                        }
-                    }
+                    onButtonReleased: KeyboardHandler.backSpacePressed()
                 }
             }
 

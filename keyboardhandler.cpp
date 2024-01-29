@@ -8,15 +8,25 @@ KeyboardHandler::KeyboardHandler(QObject *parent)
     , m_focusObject(nullptr)
     , m_showKeyboard(false)
     , m_useNumericKeyboard(false)
+    , m_useCaps(false)
 {}
 
-void KeyboardHandler::keyPressed(Qt::Key k)
+void KeyboardHandler::keyPressed(const QString& character)
 {
     if (m_focusObject)
     {
-        QKeyEvent keyPressEvent = QKeyEvent(QEvent::Type::KeyPress, k, Qt::NoModifier, /*QKeySequence(k).toString()*/"汉");
-        QCoreApplication::sendEvent(m_focusObject, &keyPressEvent);
+        if (m_focusObject)
+        {
+            QKeyEvent keyPressEvent = QKeyEvent(QEvent::Type::KeyPress, Qt::Key_1, Qt::NoModifier, /*QKeySequence(k).toString()*/character);
+            QCoreApplication::sendEvent(m_focusObject, &keyPressEvent);
+        }
     }
+}
+
+void KeyboardHandler::backSpacePressed()
+{
+    QKeyEvent keyPressEvent = QKeyEvent(QEvent::Type::KeyPress, Qt::Key_Backspace, Qt::NoModifier);//, /*QKeySequence(k).toString()*/"汉");
+    QCoreApplication::sendEvent(m_focusObject, &keyPressEvent);
 }
 
 void KeyboardHandler::hideKeyboard()
@@ -38,6 +48,20 @@ bool KeyboardHandler::useNumericKeyboard() const
     return m_useNumericKeyboard;
 }
 
+bool KeyboardHandler::useCaps() const
+{
+    return m_useCaps;
+}
+
+void KeyboardHandler::setUseCaps(bool useCaps)
+{
+    if (m_useCaps != useCaps)
+    {
+        m_useCaps = useCaps;
+        emit useCapsChanged();
+    }
+}
+
 QObject *KeyboardHandler::focusObject() const
 {
     return m_focusObject;
@@ -45,11 +69,6 @@ QObject *KeyboardHandler::focusObject() const
 
 void KeyboardHandler::onFocusObjectChanged(QObject *focusObject)
 {
-    // if (focusObject)
-    // {
-    //     qDebug() << "object got focus " << focusObject << " of type " << focusObject->metaObject()->className();
-    // }
-
     m_showKeyboard = false;
     m_focusObject = focusObject;
     if (m_focusObject != nullptr)
@@ -73,6 +92,12 @@ void KeyboardHandler::onFocusObjectChanged(QObject *focusObject)
                 emit useNumericKeyboardChanged();
             }
 
+            m_showKeyboard = true;
+        }
+        else if (QString::fromStdString(className).compare("QQuickTextEdit", Qt::CaseSensitive) == 0)
+        {
+            m_useNumericKeyboard = false;
+            emit useNumericKeyboardChanged();
             m_showKeyboard = true;
         }
     }
