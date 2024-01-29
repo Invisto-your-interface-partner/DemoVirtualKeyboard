@@ -34,8 +34,12 @@ void KeyboardHandler::hideKeyboard()
     qDebug() << "Request to close keyboard.";
     m_showKeyboard = false;
     emit showKeyboardChanged();
+}
 
-
+void KeyboardHandler::numericPressed()
+{
+    m_useNumericKeyboard = true;
+    emit useNumericKeyboardChanged();
 }
 
 bool KeyboardHandler::showKeyboard() const
