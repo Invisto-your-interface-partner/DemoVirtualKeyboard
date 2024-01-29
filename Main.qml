@@ -3,6 +3,7 @@ import QtQuick.Controls
 import QtQuick.Window
 
 Window {
+    id: window
     width: 880
     height: 720
 
