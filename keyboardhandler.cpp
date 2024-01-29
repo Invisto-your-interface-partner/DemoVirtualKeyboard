@@ -29,6 +29,12 @@ void KeyboardHandler::backSpacePressed()
     QCoreApplication::sendEvent(m_focusObject, &keyPressEvent);
 }
 
+void KeyboardHandler::enterPressed()
+{
+    QKeyEvent keyPressEvent = QKeyEvent(QEvent::Type::KeyPress, Qt::Key_Tab, Qt::NoModifier);//, /*QKeySequence(k).toString()*/"汉");
+    QCoreApplication::sendEvent(m_focusObject, &keyPressEvent);
+}
+
 void KeyboardHandler::hideKeyboard()
 {
     qDebug() << "Request to close keyboard.";
@@ -36,9 +42,15 @@ void KeyboardHandler::hideKeyboard()
     emit showKeyboardChanged();
 }
 
-void KeyboardHandler::numericPressed()
+void KeyboardHandler::requestNumericKeyboard()
 {
     m_useNumericKeyboard = true;
+    emit useNumericKeyboardChanged();
+}
+
+void KeyboardHandler::requestMainKeyboard()
+{
+    m_useNumericKeyboard = false;
     emit useNumericKeyboardChanged();
 }
 

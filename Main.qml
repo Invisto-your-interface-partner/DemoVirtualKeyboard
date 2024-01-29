@@ -43,6 +43,8 @@ Window {
             color: "#0F101A"
 
             TextInput {
+                id: oneLineField
+
                 text: "One line field"
                 width: parent.width - 5
                 x: 5
@@ -51,6 +53,7 @@ Window {
                 font.family: theme.fontRegular
                 font.pixelSize: 24
                 anchors.horizontalCenter: parent.horizontalCenter
+                KeyNavigation.tab: passwordField
             }
         }
 
@@ -64,6 +67,8 @@ Window {
             color: "#0F101A"
 
             TextInput {
+                id: passwordField
+
                 text: "Password field"
                 width: parent.width - 5
                 x: 5
@@ -72,6 +77,7 @@ Window {
                 font.family: theme.fontRegular
                 font.pixelSize: 24
                 anchors.horizontalCenter: parent.horizontalCenter
+                KeyNavigation.tab: numbersField
 
                 echoMode: TextInput.Password
             }
@@ -87,6 +93,8 @@ Window {
             color: "#0F101A"
 
             TextInput {
+                id: numbersField
+
                 text: "1234566789"
                 width: parent.width - 5
                 x: 5
@@ -95,6 +103,7 @@ Window {
                 font.family: theme.fontRegular
                 font.pixelSize: 24
                 anchors.horizontalCenter: parent.horizontalCenter
+                KeyNavigation.tab: multipleLinesField
 
                 inputMethodHints : Qt.ImhFormattedNumbersOnly
             }
@@ -110,6 +119,8 @@ Window {
             color: "#0F101A"
 
             TextEdit {
+                id: multipleLinesField
+
                 text: "Multiple lines"
                 width: parent.width - 5
                 x: 5

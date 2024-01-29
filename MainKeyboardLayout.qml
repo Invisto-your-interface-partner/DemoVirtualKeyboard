@@ -141,14 +141,11 @@ Item {
                     height: 30
                 }
 
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        KeyboardHandler.hideKeyboard()
+                onButtonReleased: {
+                    KeyboardHandler.hideKeyboard()
 
-                        // we need to take away the focus from (if any) focused TextInput field
-                        root.forceActiveFocus();
-                    }
+                    // we need to take away the focus from (if any) focused TextInput field
+                    root.forceActiveFocus();
                 }
             }
 
@@ -175,6 +172,8 @@ Item {
             KeyboardButton {
                 text: "12#"
                 functionButton: true
+
+                onButtonReleased: KeyboardHandler.requestNumericKeyboard()
             }
 
             KeyboardButton {
@@ -187,15 +186,7 @@ Item {
                     height: 30
                 }
 
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        KeyboardHandler.hideKeyboard()
-
-                        // we need to take away the focus from (if any) focused TextInput field
-                        root.forceActiveFocus();
-                    }
-                }
+                onButtonReleased: KeyboardHandler.enterPressed()
             }
         }
 

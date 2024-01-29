@@ -16,8 +16,10 @@ public:
 
     Q_INVOKABLE void keyPressed(const QString &character);
     Q_INVOKABLE void backSpacePressed();
+    Q_INVOKABLE void enterPressed();
     Q_INVOKABLE void hideKeyboard();
-    Q_INVOKABLE void numericPressed();
+    Q_INVOKABLE void requestNumericKeyboard();
+    Q_INVOKABLE void requestMainKeyboard();
 
 public:
     bool showKeyboard() const;
