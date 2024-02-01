@@ -31,7 +31,7 @@ void KeyboardHandler::backSpacePressed()
 
 void KeyboardHandler::enterPressed()
 {
-    QKeyEvent keyPressEvent = QKeyEvent(QEvent::Type::KeyPress, Qt::Key_Tab, Qt::NoModifier);//, /*QKeySequence(k).toString()*/"汉");
+    QKeyEvent keyPressEvent = QKeyEvent(QEvent::Type::KeyPress, Qt::Key_Enter, Qt::NoModifier);//, /*QKeySequence(k).toString()*/"汉");
     QCoreApplication::sendEvent(m_focusObject, &keyPressEvent);
 }
 
