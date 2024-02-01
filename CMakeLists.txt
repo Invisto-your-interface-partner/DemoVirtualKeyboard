@@ -23,6 +23,7 @@ qt_add_qml_module(app
         KeyboardButton.qml
         NumericKeyboardLayout.qml
         MainKeyboardLayout.qml
+        ScreenContent.qml
     RESOURCES
         images/backward_icon.svg
         images/captial_icon.svg

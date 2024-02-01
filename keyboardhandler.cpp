@@ -17,7 +17,7 @@ void KeyboardHandler::keyPressed(const QString& character)
     {
         if (m_focusObject)
         {
-            QKeyEvent keyPressEvent = QKeyEvent(QEvent::Type::KeyPress, Qt::Key_1, Qt::NoModifier, /*QKeySequence(k).toString()*/character);
+            QKeyEvent keyPressEvent = QKeyEvent(QEvent::Type::KeyPress, Qt::Key_1, Qt::NoModifier, character);
             QCoreApplication::sendEvent(m_focusObject, &keyPressEvent);
         }
     }
@@ -25,13 +25,13 @@ void KeyboardHandler::keyPressed(const QString& character)
 
 void KeyboardHandler::backSpacePressed()
 {
-    QKeyEvent keyPressEvent = QKeyEvent(QEvent::Type::KeyPress, Qt::Key_Backspace, Qt::NoModifier);//, /*QKeySequence(k).toString()*/"汉");
+    QKeyEvent keyPressEvent = QKeyEvent(QEvent::Type::KeyPress, Qt::Key_Backspace, Qt::NoModifier);
     QCoreApplication::sendEvent(m_focusObject, &keyPressEvent);
 }
 
 void KeyboardHandler::enterPressed()
 {
-    QKeyEvent keyPressEvent = QKeyEvent(QEvent::Type::KeyPress, Qt::Key_Enter, Qt::NoModifier);//, /*QKeySequence(k).toString()*/"汉");
+    QKeyEvent keyPressEvent = QKeyEvent(QEvent::Type::KeyPress, Qt::Key_Enter, Qt::NoModifier);
     QCoreApplication::sendEvent(m_focusObject, &keyPressEvent);
 }
 
@@ -95,7 +95,7 @@ void KeyboardHandler::onFocusObjectChanged(QObject *focusObject)
             auto inputMethodHintsProperty = focusObject->property("inputMethodHints");
             if (inputMethodHintsProperty.isNull() == false)
             {
-                bool ok;
+                bool ok = false;
                 auto inputMethodHintsValue = inputMethodHintsProperty.toInt(&ok);
                 if (inputMethodHintsValue == static_cast<int>(Qt::ImhFormattedNumbersOnly))
                 {
